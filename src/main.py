@@ -20,7 +20,7 @@ class ChangeMe():
         pygame.init()
 
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
-        self.project_name = 'Change Me'
+        self.project_name = 'Puddles'
 
         pygame.display.set_caption(self.project_name)
 
