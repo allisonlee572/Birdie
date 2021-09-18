@@ -9,8 +9,11 @@ class ChangeMe:
     RED = (255, 0, 0)
 
     # Set the width and height of the screen [width, height]
-    WIDTH = 700
+    WIDTH = 1000
     HEIGHT = 500
+
+    #700, 500
+    #2500, 750
 
     # FPS is Frame Per Second
     FPS = 40
@@ -31,6 +34,9 @@ class ChangeMe:
         # Used to manage how fast the screen updates
         self.clock = pygame.time.Clock()
 
+        self.background = pygame.image.load('assets/bg01.png')
+
+
 
     def game_loop(self):
         # -------- Main Program Loop -----------
@@ -40,7 +46,7 @@ class ChangeMe:
                 if event.type == pygame.QUIT:
                     self.running = False
 
-
+            self.screen.blit(self.background, (0, 0))
 
             pygame.display.flip()
 
