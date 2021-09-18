@@ -40,7 +40,6 @@ class Puddles:
         new_player = Player(x, random_y, random_direction, SPRITE_SIZE, self.screen)
         self.player_group.add(new_player)
 
-
     def game_loop(self):
         # -------- Main Program Loop -----------
         while self.running:
@@ -52,7 +51,6 @@ class Puddles:
             pygame.display.flip()
 
             self.screen.blit(self.background, (0, 0))
-
             # --- Limit to 60 frames per second
             self.clock.tick(FPS)
             current_fps = str(self.clock.get_fps())
@@ -65,5 +63,3 @@ class Puddles:
 if __name__ == '__main__':
     puddles = Puddles()
     puddles.game_loop()
-
-

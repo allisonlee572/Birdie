@@ -19,7 +19,6 @@ class Player(Sprite):
         image = pygame.image.load(f'assets/Avatar_MAGI_front.png')
         # self.screen.blit(self.image, (self.x, self.y))
 
-
         # self.image_index = 0
 
         # self.images = []
