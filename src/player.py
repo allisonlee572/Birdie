@@ -6,18 +6,18 @@ from config import *
 
 class Player(Sprite):
 
-    def __init__(self, x, y, direction, screen):
+    def __init__(self, x, y, direction, size, screen):
+        super().__init__()
         self.x = x
         self.y = y
-        self.screen = screen
-
-
         self.direction = direction
+        self.size = size
+        self.screen = screen
 
         self.speed = 6
 
-        image = pygame.image.load(f'assets/images/Avatar_MAGI_front.png')
-        self.screen.blit(self.image, (self.x, self.y))
+        image = pygame.image.load(f'assets/Avatar_MAGI_front.png')
+        # self.screen.blit(self.image, (self.x, self.y))
 
 
         # self.image_index = 0

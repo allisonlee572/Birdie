@@ -1,29 +1,17 @@
 import pygame
+from pygame.sprite import Group
+import random as r
+from player import Player
+from config import *
 
 
-class ChangeMe:
-    # Define some colors
-    BLACK = (0, 0, 0)
-    WHITE = (255, 255, 255)
-    GREEN = (0, 255, 0)
-    RED = (255, 0, 0)
-
-    # Set the width and height of the screen [width, height]
-    WIDTH = 1000
-    HEIGHT = 500
-
-    #700, 500
-    #2500, 750
-
-    # FPS is Frame Per Second
-    FPS = 40
-
-    TARGET_WIDTH = 10
+class Puddles:
 
     def __init__(self):
         pygame.init()
 
-        self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
+        # self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         self.project_name = 'Puddles'
 
         pygame.display.set_caption(self.project_name)
@@ -36,6 +24,21 @@ class ChangeMe:
 
         self.background = pygame.image.load('assets/bg01.png')
 
+        self.player_group = Group()
+        self.player = Player(400, 400, RIGHT, SPRITE_SIZE, self.screen)
+        self.player_group.add(self.player)
+
+    def create_player(self):
+        random_y = r.randint(0, WIDTH)
+        random_direction = r.choice([LEFT, RIGHT])
+
+        x = 0
+
+        if random_direction == LEFT:
+            x = WIDTH
+
+        new_player = Player(x, random_y, random_direction, SPRITE_SIZE, self.screen)
+        self.player_group.add(new_player)
 
 
     def game_loop(self):
@@ -46,12 +49,12 @@ class ChangeMe:
                 if event.type == pygame.QUIT:
                     self.running = False
 
-            self.screen.blit(self.background, (0, 0))
-
             pygame.display.flip()
 
+            self.screen.blit(self.background, (0, 0))
+
             # --- Limit to 60 frames per second
-            self.clock.tick(self.FPS)
+            self.clock.tick(FPS)
             current_fps = str(self.clock.get_fps())
             pygame.display.set_caption(f'{self.project_name}, fps: {current_fps}')
 
@@ -60,7 +63,7 @@ class ChangeMe:
 
 
 if __name__ == '__main__':
-    sb = ChangeMe()
-    sb.game_loop()
+    puddles = Puddles()
+    puddles.game_loop()
 
 

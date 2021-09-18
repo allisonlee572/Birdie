@@ -1,6 +1,10 @@
 # Set the width and height of the screen [width, height]
-# WIDTH = 1000
-# HEIGHT = 643
+WIDTH = 1000
+HEIGHT = 500
+
+#Don't delete:
+# 700, 500
+# 2500, 750
 
 # Define some colors
 BLACK = (0, 0, 0)
