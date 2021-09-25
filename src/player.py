@@ -16,7 +16,7 @@ class Player(Sprite):
 
         self.speed = 6
 
-        image = pygame.image.load(f'assets/Avatar_MAGI_front.png')
+        self.image = pygame.image.load(f'assets/Avatar_MAGI_front.png')
         # self.screen.blit(self.image, (self.x, self.y))
 
         # self.image_index = 0
@@ -30,7 +30,7 @@ class Player(Sprite):
         # self.images.append(img)
         # self.image_index = 0
         # image = self.images[0]
-        self.rect = pygame.Rect(x, y, image.get_width(), image.get_height())
+        self.rect = pygame.Rect(x, y, self.image.get_width(), self.image.get_height())
 
     def update(self):
         self.screen.blit(self.image, (self.x, self.y))

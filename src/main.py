@@ -28,16 +28,19 @@ class Puddles:
         self.player = Player(400, 400, RIGHT, SPRITE_SIZE, self.screen)
         self.player_group.add(self.player)
 
+        self.mode = GAME_STARTED
+
     def create_player(self):
         random_y = r.randint(0, WIDTH)
         random_direction = r.choice([LEFT, RIGHT])
 
         x = 0
+        y = 0
 
-        if random_direction == LEFT:
-            x = WIDTH
+        # if random_direction == LEFT:
+            # x = WIDTH
 
-        new_player = Player(x, random_y, random_direction, SPRITE_SIZE, self.screen)
+        new_player = Player(x, y, random_direction, SPRITE_SIZE, self.screen)
         self.player_group.add(new_player)
 
     def game_loop(self):
@@ -59,6 +62,13 @@ class Puddles:
         # Close the window and quit.
         pygame.quit()
 
+        if self.mode == GAME_NOT_STARTED:
+            pass
+        else:
+            self.handle_game_in_session()
+
+    def handle_game_in_session(self):
+        self.player_group.update()
 
 if __name__ == '__main__':
     puddles = Puddles()
