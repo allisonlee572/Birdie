@@ -4,7 +4,7 @@ import random as r
 from config import *
 
 
-class Player(Sprite):
+class Enemy1(Sprite):
 
     def __init__(self, x, y, direction, size, screen):
         super().__init__()
@@ -19,8 +19,8 @@ class Player(Sprite):
         self.right_images = []
         self.left_images = []
         for idx in range(1,2):
-            self.image = pygame.image.load(f'assets/Avatar_MAGI_right_{idx}.png')
-            self.image = pygame.transform.scale(self.image, (int(size * 2.5), (int(size * 2.5))))
+            self.image = pygame.image.load(f'assets/Avatar_Boli_front.png')
+            self.image = pygame.transform.scale(self.image, (int(size * 2), (int(size * 2))))
             self.right_images.append(self.image)
 
             # self.screen.blit(self.image, (self.x, self.y))
@@ -63,18 +63,6 @@ class Player(Sprite):
     def update(self):
         # self.screen.blit(self.image, (self.x, self.y))
 
-        keys_pressed = pygame.key.get_pressed()
-
-        if keys_pressed[pygame.K_w]:
-            self.y -= self.speed
-        if keys_pressed[pygame.K_a]:
-            self.x -= self.speed
-            self.direction = LEFT
-        if keys_pressed[pygame.K_s]:
-            self.y += self.speed
-        if keys_pressed[pygame.K_d]:
-            self.x += self.speed
-            self.direction = RIGHT
         self.image = self.get_next_image()
         
         self.rect.x = self.x

@@ -2,6 +2,8 @@ import pygame
 from pygame.sprite import Group
 import random as r
 from player import Player
+from enemy1 import Enemy1
+from enemy2 import Enemy2
 from config import *
 
 
@@ -25,8 +27,12 @@ class Puddles:
         self.background = pygame.image.load('assets/bg01.png')
 
         self.player_group = Group()
-        self.player = Player(400, 400, RIGHT, SPRITE_SIZE, self.screen)
+        self.player = Player(20, 305, RIGHT, SPRITE_SIZE, self.screen)
         self.player_group.add(self.player)
+
+        self.enemy1_group = Group()
+        self.enemy1 = Enemy1(200, 330, RIGHT, SPRITE_SIZE, self.screen)
+        self.enemy2 = Enemy2(400,330, RIGHT, SPRITE_SIZE, self.screen)
 
         self.mode = GAME_STARTED
 
@@ -37,11 +43,18 @@ class Puddles:
         x = 0
         y = 0
 
-        # if random_direction == LEFT:
-            # x = WIDTH
+        if random_direction == LEFT:
+            x = WIDTH
 
         new_player = Player(x, y, random_direction, SPRITE_SIZE, self.screen)
         self.player_group.add(new_player)
+
+    def handle_player_enemy1_collision(self, player, enemy1):
+        if player.rect.colliderect(enemy1.rect):
+            self.background = pygame.image.load('assets/bg02.png')
+            return True
+        else:
+            return False
 
     def game_loop(self):
         # -------- Main Program Loop -----------
@@ -54,6 +67,14 @@ class Puddles:
             pygame.display.flip()
 
             self.screen.blit(self.background, (0, 0))
+
+            # if self.mode == GAME_NOT_STARTED:
+                # pass
+            # else:
+            if self.mode == GAME_STARTED:
+                self.handle_game_in_session()
+
+
             # --- Limit to 60 frames per second
             self.clock.tick(FPS)
             current_fps = str(self.clock.get_fps())
@@ -62,13 +83,13 @@ class Puddles:
         # Close the window and quit.
         pygame.quit()
 
-        if self.mode == GAME_NOT_STARTED:
-            pass
-        else:
-            self.handle_game_in_session()
-
     def handle_game_in_session(self):
+        pygame.sprite.groupcollide(self.player_group, self.enemy1_group, True, True, self.handle_player_enemy1_collision)
+
         self.player_group.update()
+        self.enemy1.update()
+        self.enemy2.update()
+
 
 if __name__ == '__main__':
     puddles = Puddles()
