@@ -66,6 +66,7 @@ class Puddles:
             self.background = pygame.image.load('assets/bg02.png')
             self.battle_player_group.add(self.battle_player)
             self.battle_enemy1_group.add(self.battle_enemy1)
+            self.enemy1_group.empty()
             return True
         else:
             return False
