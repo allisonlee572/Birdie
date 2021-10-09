@@ -6,6 +6,8 @@ from enemy1 import Enemy1
 from enemy2 import Enemy2
 from battle_player import BattlePlayer
 from battle_enemy1 import BattleEnemy1
+from battle_enemy2 import BattleEnemy2
+from bullet import Bullet
 from config import *
 
 
@@ -46,7 +48,40 @@ class Puddles:
         self.battle_enemy1_group = Group()
         self.battle_enemy1 = BattleEnemy1(WIDTH/2, 0, RIGHT, SPRITE_SIZE, self.screen)
 
+        self.battle_enemy2_group = Group()
+        self.battle_enemy2 = BattleEnemy2(WIDTH / 2, 0, RIGHT, SPRITE_SIZE, self.screen)
+
+        self.bullet_group = Group()
+
         self.mode = GAME_STARTED
+
+        self.bullet_cooldown_timer = BULLET_COOLDOWN_DELAY
+
+    def create_bullet(self):
+        random_y = r.randint(0, HEIGHT)
+        new_bullet = Bullet(0, random_y, RIGHT, SPRITE_SIZE, self.screen)
+        self.bullet_group.add(new_bullet)
+
+    def launch_bullet(self):
+        keys_pressed = pygame.key.get_pressed()
+
+        self.bullet_cooldown_timer -= 1
+
+        if self.bullet_cooldown_timer <= 0:
+            if keys_pressed[pygame.K_SPACE]:
+                bullet = Bullet(self.battle_player.x, self.battle_player.y, SPRITE_SIZE, self.player.direction, self.screen)
+                self.bullet_group.add(bullet)
+                self.bullet_cooldown_timer = BULLET_COOLDOWN_DELAY
+                if self.player.direction == UP:
+                    self.battle_player.y = self.player.y + 50
+                if self.player.direction == DOWN:
+                    self.battle_player.y = self.player.y - 300
+
+                # bullet = Bullet(self.x, bullet_y, SPRITE_SIZE, self.player.direction,self.screen)
+                # self.bullet_group.add(bullet)
+                # self.bullet_cooldown_timer = BULLET_COOLDOWN_DELAY
+
+
 
     def create_player(self):
         random_y = r.randint(0, WIDTH)
@@ -66,7 +101,8 @@ class Puddles:
             self.background = pygame.image.load('assets/bg02.png')
             self.battle_player_group.add(self.battle_player)
             self.battle_enemy1_group.add(self.battle_enemy1)
-            self.enemy1_group.empty()
+            self.enemy2_group.empty()
+            self.create_bullet()
             return True
         else:
             return False
@@ -74,6 +110,10 @@ class Puddles:
     def handle_player_enemy2_collision(self, player, enemy2):
         if player.rect.colliderect(enemy2.rect):
             self.background = pygame.image.load('assets/bg03.png')
+            self.battle_player_group.add(self.battle_player)
+            self.battle_enemy2_group.add(self.battle_enemy2)
+            self.enemy1_group.empty()
+            self.create_bullet()
             print("collision correct")
             return True
         else:
@@ -97,7 +137,6 @@ class Puddles:
             if self.mode == GAME_STARTED:
                 self.handle_game_in_session()
 
-
             # --- Limit to 60 frames per second
             self.clock.tick(FPS)
             current_fps = str(self.clock.get_fps())
@@ -110,14 +149,16 @@ class Puddles:
         pygame.sprite.groupcollide(self.player_group, self.enemy1_group, True, True, self.handle_player_enemy1_collision)
         pygame.sprite.groupcollide(self.player_group, self.enemy2_group, True, True, self.handle_player_enemy2_collision)
 
-
         self.player_group.update()
-        self.enemy1.update()
-        self.enemy2.update()
+        self.enemy1_group.update()
+        self.enemy2_group.update()
 
         self.battle_player_group.update()
         self.battle_enemy1_group.update()
+        self.battle_enemy2_group.update()
 
+        self.launch_bullet()
+        self.bullet_group.update()
 
 if __name__ == '__main__':
     puddles = Puddles()
