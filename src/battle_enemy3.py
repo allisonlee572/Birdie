@@ -4,7 +4,7 @@ import random as r
 from config import *
 
 
-class BattlePlayer(Sprite):
+class BattleEnemy3(Sprite):
 
     def __init__(self, x, y, direction, size, screen):
         super().__init__()
@@ -12,6 +12,7 @@ class BattlePlayer(Sprite):
         self.y = y
         self.screen = screen
         self.direction = direction
+        #self.direction_x = direction_x #used to have self.direction_x as a parameter in innit
         self.size = size
         self.speed = 6
         self.player_float_timer = PLAYER_FLOAT_DELAY
@@ -19,8 +20,8 @@ class BattlePlayer(Sprite):
         self.right_images = []
         self.left_images = []
         for idx in range(1,2):
-            self.image = pygame.image.load(f'assets/Avatar_MAGI_back.png')
-            self.image = pygame.transform.scale(self.image, (int(size * 2.5), (int(size * 2.5))))
+            self.image = pygame.image.load(f'assets/Avatar_Temmie_right.png')
+            self.image = pygame.transform.scale(self.image, (int(size * 2), (int(size * 2))))
             self.right_images.append(self.image)
 
             # self.screen.blit(self.image, (self.x, self.y))
@@ -34,8 +35,10 @@ class BattlePlayer(Sprite):
 
             if self.direction == RIGHT:
                 self.images = self.right_images
+                #self.direction_x = self.right_direction_x
             if self.direction == LEFT:
                 self.images = self.left_images
+                #self.direction_x = self.left_direction_x
 
             self.image = self.get_next_image()
             self.rect = pygame.Rect(x, y, self.image.get_width(), self.image.get_height())
@@ -46,6 +49,7 @@ class BattlePlayer(Sprite):
         # self.images.append(img)
         # self.image_index = 0
         # image = self.images[0]
+
 
     def get_next_image(self):
         self.player_float_timer -= 1
@@ -63,18 +67,41 @@ class BattlePlayer(Sprite):
     def update(self):
         # self.screen.blit(self.image, (self.x, self.y))
 
-        keys_pressed = pygame.key.get_pressed()
-
-        if keys_pressed[pygame.K_a]:
-            self.x -= self.speed
-            self.direction = LEFT
-        if keys_pressed[pygame.K_d]:
-            self.x += self.speed
-            self.direction = RIGHT
         self.image = self.get_next_image()
         
         self.rect.x = self.x
         self.rect.y = self.y
+
+       # use directions: if left direction move left when x == 900, if right direction move right when x == 100
+        """
+        if self.x == 100:
+            right_x
+        if self.x == 099
+
+        if self.x >= 100:
+            self.x += self.speed
+        if self.x >= 100 and self.x <= 900: 
+            self.x -= self.speed
+        """
+
+        """
+        self.right_direction_x += self.speed
+        self.left_direction_x -= self.speed
+
+        if self.x == 100:
+            self.x += self.speed
+            self.right_direction_x = RIGHT
+        if self.x == 900:
+            self.x -= self.speed
+            self.left_direction_x = LEFT
+            #note: move the codes in squiggly lines to the innit method? probably no.no need to
+
+        """
+        if 100 <= self.x < 900:
+            self.x += self.speed
+        if self.x == 900:
+            self.x -= self.speed
+
 
         # image = self.get_next_image()
 
