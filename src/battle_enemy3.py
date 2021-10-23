@@ -6,12 +6,12 @@ from config import *
 
 class BattleEnemy3(Sprite):
 
-    def __init__(self, x, y, direction, size, screen):
+    def __init__(self, x, y, size, screen):
         super().__init__()
         self.x = x
         self.y = y
         self.screen = screen
-        self.direction = direction
+        self.direction = RIGHT
         #self.direction_x = direction_x #used to have self.direction_x as a parameter in innit
         self.size = size
         self.speed = 6
@@ -43,6 +43,8 @@ class BattleEnemy3(Sprite):
             self.image = self.get_next_image()
             self.rect = pygame.Rect(x, y, self.image.get_width(), self.image.get_height())
 
+        self.health = 7
+
 
         # self.images = []
 
@@ -63,6 +65,13 @@ class BattleEnemy3(Sprite):
         if self.direction == LEFT:
             self.images = self.left_images
         return self.images[self.image_index]
+
+    def reset_battle_enemy_3(self, x, y):
+        self.x = x
+        self.y = y
+        self.rect.x = self.x
+        self.rect.y = self.y
+        self.health = 7
 
     def update(self):
         # self.screen.blit(self.image, (self.x, self.y))
@@ -96,12 +105,29 @@ class BattleEnemy3(Sprite):
             self.left_direction_x = LEFT
             #note: move the codes in squiggly lines to the innit method? probably no.no need to
 
-        """
+        
         if 100 <= self.x < 900:
             self.x += self.speed
         if self.x == 900:
             self.x -= self.speed
+        """
 
+        start_x = 100
+        end_x = 900
+
+        if self.direction == RIGHT:
+            self.x += self.speed
+        if self.direction == LEFT:
+            self.images = self.left_images
+            self.x -= self.speed
+            # self.direction_x = self.left_direction_x
+
+        if self.x <= start_x:
+            self.direction = RIGHT
+            # self.x += self.speed
+        if self.x >= end_x:
+            self.direction = LEFT
+            # self.x -= self.speed
 
         # image = self.get_next_image()
 

@@ -19,8 +19,10 @@ class Player(Sprite):
         self.right_images = []
         self.left_images = []
         for idx in range(1,2):
-            self.image = pygame.image.load(f'assets/Avatar_MAGI_right_{idx}.png')
-            self.image = pygame.transform.scale(self.image, (int(size * 2.5), (int(size * 2.5))))
+            # self.image = pygame.image.load(f'assets/Avatar_MAGI_right_{idx}.png')
+            # if trying to use two images, rename "Avatar_MAGI_right.png" to "Avatar_MAGI_right_1.png"
+            self.image = pygame.image.load(f'assets/Avatar_MAGI_right.png')
+            self.image = pygame.transform.scale(self.image, (int(size * 2), (int(size * 2.5))))
             self.right_images.append(self.image)
 
             # self.screen.blit(self.image, (self.x, self.y))
@@ -59,6 +61,13 @@ class Player(Sprite):
         if self.direction == LEFT:
             self.images = self.left_images
         return self.images[self.image_index]
+
+    def set_position(self, x, y):
+        self.x = x
+        self.y = y
+        self.rect.x = self.x
+        self.rect.y = self.y
+
 
     def update(self):
         # self.screen.blit(self.image, (self.x, self.y))

@@ -20,7 +20,7 @@ class BattlePlayer(Sprite):
         self.left_images = []
         for idx in range(1,2):
             self.image = pygame.image.load(f'assets/Avatar_MAGI_back.png')
-            self.image = pygame.transform.scale(self.image, (int(size * 2.5), (int(size * 2.5))))
+            self.image = pygame.transform.scale(self.image, (int(size * 2.0), (int(size * 2.5))))
             self.right_images.append(self.image)
 
             # self.screen.blit(self.image, (self.x, self.y))
@@ -59,6 +59,12 @@ class BattlePlayer(Sprite):
         if self.direction == LEFT:
             self.images = self.left_images
         return self.images[self.image_index]
+
+    def reset_battle_player(self, x, y):
+        self.x = x
+        self.y = y
+        self.rect.x = self.x
+        self.rect.y = self.y
 
     def update(self):
         # self.screen.blit(self.image, (self.x, self.y))

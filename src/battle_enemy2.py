@@ -40,6 +40,8 @@ class BattleEnemy2(Sprite):
             self.image = self.get_next_image()
             self.rect = pygame.Rect(x, y, self.image.get_width(), self.image.get_height())
 
+        self.health = 6
+
 
         # self.images = []
 
@@ -59,6 +61,13 @@ class BattleEnemy2(Sprite):
         if self.direction == LEFT:
             self.images = self.left_images
         return self.images[self.image_index]
+
+    def reset_battle_enemy_2(self, x, y):
+        self.x = x
+        self.y = y
+        self.rect.x = self.x
+        self.rect.y = self.y
+        self.health = 6
 
     def update(self):
         # self.screen.blit(self.image, (self.x, self.y))
