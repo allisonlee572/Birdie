@@ -12,7 +12,7 @@ class HealthBorder(Sprite):
         self.screen = screen
 
         self.image = pygame.image.load(f'assets/Health Border.png')
-        self.image = pygame.transform.scale(self.image, (int(size*1.0), size))
+        self.image = pygame.transform.scale(self.image, (int(size * 6.5), (int(size * 1.5))))
 
         # self.rect = pygame.Rect(x, y, self.image.get_width(), self.image.get_height())
 

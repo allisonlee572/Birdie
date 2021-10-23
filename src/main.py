@@ -41,8 +41,8 @@ class Puddles:
         # self.health_border = Group()
         # self.health_border = HealthBorder(0, 0, SPRITE_SIZE, self.screen)
 
-        self.health_border = Group()
-        self.health_border = HealthBorder(0, 0, SPRITE_SIZE, self.screen)
+        self.health_border_group = Group()
+        self.health_border = HealthBorder(15, 20, SPRITE_SIZE, self.screen)
 
         self.player_group = Group()
         self.player = Player(30, 305, RIGHT, SPRITE_SIZE, self.screen)
@@ -187,14 +187,6 @@ class Puddles:
                 # bullet = Bullet(self.x, bullet_y, SPRITE_SIZE, self.player.direction,self.screen)
                 # self.bullet_group.add(bullet)
                 # self.bullet_cooldown_timer = BULLET_COOLDOWN_DELAY
-
-    def create_health_border(self):
-        x = 0
-        y = 0
-
-        new_health_border = HealthBorder(x, y, SPRITE_SIZE, self.screen)
-        self.health_border_group.add(new_health_border)
-
 
     def create_player(self):
         random_y = r.randint(0, WIDTH)
@@ -421,6 +413,8 @@ class Puddles:
         self.battle_enemy2_group.empty()
         self.battle_enemy3_group.empty()
 
+        self.health_border_group.update()
+
         self.battle_player_group.update()
         self.battle_enemy1_group.update()
 
@@ -440,6 +434,8 @@ class Puddles:
     def handle_battle_2_in_session(self):
         self.battle_enemy1_group.empty()
         self.battle_enemy3_group.empty()
+
+        self.health_border_group.update()
 
         self.battle_player_group.update()
         self.battle_enemy2_group.update()
@@ -471,6 +467,8 @@ class Puddles:
         self.battle_enemy1_group.empty()
         self.battle_enemy2_group.empty()
 
+        self.health_border_group.update()
+
         self.battle_player_group.update()
         self.battle_enemy3_group.update()
 
@@ -499,18 +497,18 @@ class Puddles:
 
     def draw_enemy1_health_indicator(self):
         health_text = f"Enemy Lives Remaining: {self.battle_enemy1.health}"
-        health_msg = self.font.render(health_text, 1, WHITE)
-        self.screen.blit(health_msg, (30, 30))
+        health_msg = self.font.render(health_text, 1, BLACK)
+        self.screen.blit(health_msg, (45, 50))
 
     def draw_enemy2_health_indicator(self):
         health_text = f"Enemy Lives Remaining: {self.battle_enemy2.health}"
-        health_msg = self.font.render(health_text, 1, WHITE)
-        self.screen.blit(health_msg, (30, 30))
+        health_msg = self.font.render(health_text, 1, BLACK)
+        self.screen.blit(health_msg, (45, 50))
 
     def draw_enemy3_health_indicator(self):
         health_text = f"Enemy Lives Remaining: {self.battle_enemy3.health}"
-        health_msg = self.font.render(health_text, 1, WHITE)
-        self.screen.blit(health_msg, (30, 30))
+        health_msg = self.font.render(health_text, 1, BLACK)
+        self.screen.blit(health_msg, (45, 50))
 
 
 if __name__ == '__main__':
