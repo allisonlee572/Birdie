@@ -3,7 +3,7 @@ import pygame
 import random as r
 from config import *
 
-class Bullet1(Sprite):
+class Enemy2_Bullet2(Sprite):
 
     def __init__(self, x, y, size, direction, screen):
         super().__init__()
@@ -25,7 +25,9 @@ class Bullet1(Sprite):
         # img = pygame.image.load(f'assets/player-1.png')
 
     def update(self):
+        self.x += self.speed
         self.y += self.speed
+        self.rect.x = self.x
         self.rect.y = self.y
 
         if DEBUG_MODE:

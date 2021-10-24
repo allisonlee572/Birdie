@@ -13,8 +13,10 @@ class BattlePlayer(Sprite):
         self.screen = screen
         self.direction = direction
         self.size = size
-        self.speed = 6
+
         self.player_float_timer = PLAYER_FLOAT_DELAY
+
+        self.speed = 6
 
         self.right_images = []
         self.left_images = []
