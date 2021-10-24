@@ -99,6 +99,13 @@ class MagicvsMagic:
 
         self.font = pygame.font.SysFont("default", 30)
 
+        self.plop_sound = pygame.mixer.Sound("assets/plop.wav")
+        # self.plop_sound.set_volume(0.2)
+
+        pygame.mixer.music.load("assets/background.mp3")
+        # pygame.mixer.music.set_volume(0.1)
+        pygame.mixer.music.play()
+
     '''
     def create_bullet(self):
         random_y = r.randint(0, HEIGHT)
@@ -354,6 +361,7 @@ class MagicvsMagic:
 
                 self.battle_player_group.empty()
                 self.battle_enemy3_group.empty()
+
                 self.mode = GAME_STARTED
                 # change the player.set_position because it's the end of the game
             return True
@@ -370,6 +378,8 @@ class MagicvsMagic:
             self.battle_enemy2_group.empty()
             self.battle_enemy3_group.empty()
 
+            self.plop_sound.play()
+
             self.mode = GAME_STARTED
             return True
         else:
@@ -384,6 +394,8 @@ class MagicvsMagic:
             self.battle_enemy1_group.empty()
             self.battle_enemy2_group.empty()
             self.battle_enemy3_group.empty()
+
+            self.plop_sound.play()
 
             self.mode = GAME_STARTED
             return True
@@ -400,6 +412,8 @@ class MagicvsMagic:
             self.battle_enemy2_group.empty()
             self.battle_enemy3_group.empty()
 
+            self.plop_sound.play()
+
             self.mode = GAME_STARTED
             return True
         else:
@@ -415,6 +429,8 @@ class MagicvsMagic:
             self.battle_enemy2_group.empty()
             self.battle_enemy3_group.empty()
 
+            self.plop_sound.play()
+
             self.mode = GAME_STARTED
             return True
         else:
@@ -429,6 +445,8 @@ class MagicvsMagic:
             self.battle_enemy1_group.empty()
             self.battle_enemy2_group.empty()
             self.battle_enemy3_group.empty()
+
+            self.plop_sound.play()
 
             self.mode = GAME_STARTED
             print("collision works")
@@ -446,6 +464,8 @@ class MagicvsMagic:
             self.battle_enemy2_group.empty()
             self.battle_enemy3_group.empty()
 
+            self.plop_sound.play()
+
             self.mode = GAME_STARTED
             return True
         else:
@@ -460,6 +480,8 @@ class MagicvsMagic:
             self.battle_enemy1_group.empty()
             self.battle_enemy2_group.empty()
             self.battle_enemy3_group.empty()
+
+            self.plop_sound.play()
 
             self.mode = GAME_STARTED
             return True
@@ -681,11 +703,9 @@ if __name__ == '__main__':
 
 # After most codes are finished:
 # change enemy health back to higher numbers
-# make the player be able to move only left and right after most of the codes are done
+# make the player be able to move only right after most of the codes are done
 # change the player's position after the third battle is won because the game is closed to finished
 # see if I still want to make the battle player faster at BATTLE_3?
-
-# add game music
 
 # for the collision detections, it says bullet1 instead of enemy1_bullet1, enemy2_bullet1, etc.
 # when on the landing page, make sure the player only faces right - which might already happen if the player can only
@@ -693,3 +713,4 @@ if __name__ == '__main__':
 # add game won page
 # add title at the top of the landing page?
 # recrop images?
+#go through all of the codes and delete any commented out codes, any codes with hashtags, any extra/unused assets and files

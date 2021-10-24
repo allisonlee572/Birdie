@@ -22,12 +22,12 @@ class BattleEnemy3(Sprite):
         for idx in range(1,2):
             self.image = pygame.image.load(f'assets/Avatar_Temmie_right.png')
             self.image = pygame.transform.scale(self.image, (int(size * 2), (int(size * 2))))
-            self.right_images.append(self.image)
+            self.left_images.append(self.image)
 
             # self.screen.blit(self.image, (self.x, self.y))
 
-            left_image = pygame.transform.flip(self.image, True, False)
-            self.left_images.append(left_image)
+            right_image = pygame.transform.flip(self.image, True, False)
+            self.right_images.append(right_image)
 
             self.image_index = 0
 
