@@ -26,11 +26,8 @@ class MagicvsMagic:
     def __init__(self):
         pygame.init()
 
-        #self.mode = GAME_STARTED
         self.mode = GAME_BEGIN
-        # self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
-        # self.direction_x = BattleEnemy3.right_direction_x
         self.project_name = 'Magic vs. Magic'
 
         pygame.display.set_caption(self.project_name)
@@ -42,9 +39,6 @@ class MagicvsMagic:
         self.clock = pygame.time.Clock()
 
         self.background = pygame.image.load('assets/bg01.png')
-
-        # self.health_border = Group()
-        # self.health_border = HealthBorder(0, 0, SPRITE_SIZE, self.screen)
 
         self.health_border_group = Group()
         self.health_border = HealthBorder(15, 20, SPRITE_SIZE, self.screen)
@@ -72,7 +66,6 @@ class MagicvsMagic:
 
         self.battle_enemy3_group = Group()
         self.battle_enemy3 = BattleEnemy3(100, 0, SPRITE_SIZE, self.screen)
-        #self.battle_enemy3 = BattleEnemy3(100, 0, RIGHT, self.right_direction_x, SPRITE_SIZE, self.screen)
 
         self.bullet_group = Group()
         self.bullet_cooldown_timer = BULLET_COOLDOWN_DELAY
@@ -101,35 +94,18 @@ class MagicvsMagic:
         self.font = pygame.font.SysFont("Times New Roman Bold", 23)
         self.big_font = pygame.font.SysFont("Times New Roman Bold", 93)
 
-        #Times New Roman Bold, Times New Roman ,Charter, Cochin, default,
-
         self.plop_sound = pygame.mixer.Sound("assets/plop.wav")
-        # self.plop_sound.set_volume(0.2)
 
         pygame.mixer.music.load("assets/background.mp3")
-        # pygame.mixer.music.set_volume(0.1)
         pygame.mixer.music.play()
 
         self.play_button = pygame.image.load('assets/play_button.png')
 
-    '''
-    def create_bullet(self):
-        random_y = r.randint(0, HEIGHT)
-        new_bullet = Bullet(0, random_y, RIGHT, SPRITE_SIZE, self.screen)
-        self.bullet_group.add(new_bullet)
-    '''
     def auto_launch_enemy1_bullet1(self):
         self.enemy1_bullet1_cooldown_timer -= 1
         if self.enemy1_bullet1_cooldown_timer == 0:
             self.enemy1_bullet1_cooldown_timer = ENEMY_BULLET_COOLDOWN_DELAY
-            # random_y = r.randint(0, WIDTH)
-            # random_direction = r.choice([LEFT, RIGHT])
-            # if random_direction == LEFT:
-                # x = WIDTH
-
             self.battle_enemy1_bullet_x = self.battle_enemy1.x + (SPRITE_SIZE / 2)
-            # move the above code (in squiggly lines) to the innit method?
-
             new_enemy1_bullet1 = Enemy1_Bullet1(self.battle_enemy1_bullet_x, self.battle_enemy1.y,
                                          SPRITE_SIZE, self.enemy1.direction, self.screen)
             self.enemy1_bullet1_group.add(new_enemy1_bullet1)
@@ -138,14 +114,7 @@ class MagicvsMagic:
         self.enemy2_bullet1_cooldown_timer -= 1
         if self.enemy2_bullet1_cooldown_timer == 0:
             self.enemy2_bullet1_cooldown_timer = ENEMY_BULLET_COOLDOWN_DELAY
-            # random_y = r.randint(0, WIDTH)
-            # random_direction = r.choice([LEFT, RIGHT])
-            # if random_direction == LEFT:
-            # x = WIDTH
-
             self.battle_enemy2_bullet_x = self.battle_enemy2.x + (SPRITE_SIZE / 2)
-            # move the above code (in squiggly lines) to the innit method?
-
             new_enemy2_bullet1 = Enemy2_Bullet1(self.battle_enemy2_bullet_x, self.battle_enemy2.y,
                                                 SPRITE_SIZE, self.enemy2.direction, self.screen)
             self.enemy2_bullet1_group.add(new_enemy2_bullet1)
@@ -154,14 +123,7 @@ class MagicvsMagic:
         self.enemy3_bullet1_cooldown_timer -= 1
         if self.enemy3_bullet1_cooldown_timer == 0:
             self.enemy3_bullet1_cooldown_timer = ENEMY_BULLET_COOLDOWN_DELAY
-            # random_y = r.randint(0, WIDTH)
-            # random_direction = r.choice([LEFT, RIGHT])
-            # if random_direction == LEFT:
-            # x = WIDTH
-
             self.battle_enemy3_bullet_x = self.battle_enemy3.x + (SPRITE_SIZE / 2)
-            # move the above code (in squiggly lines) to the innit method?
-
             new_enemy3_bullet1 = Enemy3_Bullet1(self.battle_enemy3_bullet_x, self.battle_enemy3.y,
                                                 SPRITE_SIZE, self.enemy3.direction, self.screen)
             self.enemy3_bullet1_group.add(new_enemy3_bullet1)
@@ -171,8 +133,6 @@ class MagicvsMagic:
         if self.enemy2_bullet2_cooldown_timer == 0:
             self.enemy2_bullet2_cooldown_timer = ENEMY_BULLET_COOLDOWN_DELAY
             self.battle_enemy2_bullet_x = self.battle_enemy2.x + (SPRITE_SIZE / 2)
-            # move the above code (in squiggly lines) to the innit method?
-
             new_enemy2_bullet2 = Enemy2_Bullet2(self.battle_enemy2_bullet_x, self.battle_enemy2.y,
                                                 SPRITE_SIZE, self.enemy2.direction, self.screen)
             self.enemy2_bullet2_group.add(new_enemy2_bullet2)
@@ -182,8 +142,6 @@ class MagicvsMagic:
         if self.enemy3_bullet2_cooldown_timer == 0:
             self.enemy3_bullet2_cooldown_timer = ENEMY_BULLET_COOLDOWN_DELAY
             self.battle_enemy3_bullet_x = self.battle_enemy3.x + (SPRITE_SIZE / 2)
-            # move the above code (in squiggly lines) to the innit method?
-
             new_enemy3_bullet2 = Enemy3_Bullet2(self.battle_enemy3_bullet_x, self.battle_enemy3.y,
                                                 SPRITE_SIZE, self.enemy3.direction, self.screen)
             self.enemy3_bullet2_group.add(new_enemy3_bullet2)
@@ -193,75 +151,24 @@ class MagicvsMagic:
         if self.enemy2_bullet3_cooldown_timer == 0:
             self.enemy2_bullet3_cooldown_timer = ENEMY_BULLET_COOLDOWN_DELAY
             self.battle_enemy2_bullet_x = self.battle_enemy2.x + (SPRITE_SIZE / 2)
-            # move the above code (in squiggly lines) to the innit method?
-
             new_enemy2_bullet3 = Enemy2_Bullet3(self.battle_enemy2_bullet_x, self.battle_enemy2.y,
                                                 SPRITE_SIZE, self.enemy2.direction, self.screen)
             self.enemy2_bullet3_group.add(new_enemy2_bullet3)
-
-            # note: this one says battle_enemy2 because it is used for battle_enemy2
 
     def auto_launch_enemy3_bullet3(self):
         self.enemy3_bullet3_cooldown_timer -= 1
         if self.enemy3_bullet3_cooldown_timer == 0:
             self.enemy3_bullet3_cooldown_timer = ENEMY_BULLET_COOLDOWN_DELAY
             self.battle_enemy3_bullet_x = self.battle_enemy3.x + (SPRITE_SIZE / 2)
-            # move the above code (in squiggly lines) to the innit method?
-
             new_enemy3_bullet3 = Enemy3_Bullet3(self.battle_enemy3_bullet_x, self.battle_enemy3.y,
                                                 SPRITE_SIZE, self.enemy3.direction, self.screen)
             self.enemy3_bullet3_group.add(new_enemy3_bullet3)
-        """
 
-
-    def auto_launch_bullet1_v2(self):
-        self.enemy1_bullet1_cooldown_timer -= 1
-        if self.enemy1_bullet1_cooldown_timer == 0:
-            self.enemy1_bullet1_cooldown_timer = ENEMY_BULLET_COOLDOWN_DELAY
-            # random_y = r.randint(0, WIDTH)
-            # random_direction = r.choice([LEFT, RIGHT])
-            # if random_direction == LEFT:
-            # x = WIDTH
-
-            self.battle_enemy3_bullet_x = self.battle_enemy3.x + (SPRITE_SIZE / 2)
-            # move the above code (in squiggly lines) to the innit method?
-
-            new_bullet1 = Enemy1_Bullet1(self.battle_enemy3_bullet_x, self.battle_enemy3.y,
-                                         SPRITE_SIZE, self.enemy3.direction, self.screen)
-            self.enemy1_bullet1_group.add(new_bullet1)
-        
-
-
-    def auto_launch_bullet2_v2(self):
-        self.enemy2_bullet2_cooldown_timer -= 1
-        if self.enemy2_bullet2_cooldown_timer == 0:
-            self.enemy2_bullet2_cooldown_timer = ENEMY_BULLET_COOLDOWN_DELAY
-            self.battle_enemy3_bullet_x = self.battle_enemy3.x + (SPRITE_SIZE / 2)
-            # move the above code (in squiggly lines) to the innit method?
-
-            new_bullet2 = Enemy2_Bullet2(self.battle_enemy3_bullet_x, self.battle_enemy3.y,
-                                         SPRITE_SIZE, self.enemy3.direction, self.screen)
-            self.enemy2_bullet2_group.add(new_bullet2)
-    
-
-    def auto_launch_bullet3_v2(self):
-        self.enemy2_bullet3_cooldown_timer -= 1
-        if self.enemy2_bullet3_cooldown_timer == 0:
-            self.enemy2_bullet3_cooldown_timer = ENEMY_BULLET_COOLDOWN_DELAY
-            self.battle_enemy3_bullet_x = self.battle_enemy3.x + (SPRITE_SIZE / 2)
-            # move the above code (in squiggly lines) to the innit method?
-
-            new_bullet3 = Enemy2_Bullet3(self.battle_enemy3_bullet_x, self.battle_enemy3.y,
-                                         SPRITE_SIZE, self.enemy3.direction, self.screen)
-            self.enemy2_bullet3_group.add(new_bullet3)
-            
-    """
     def launch_bullet(self):
         keys_pressed = pygame.key.get_pressed()
 
         self.bullet_cooldown_timer -= 1
         self.battle_player_bullet_x = self.battle_player.x + (SPRITE_SIZE / 2)
-        # move the above code (in squiggly lines) to the innit method?
 
         if self.bullet_cooldown_timer <= 0:
             if keys_pressed[pygame.K_SPACE]:
@@ -273,21 +180,11 @@ class MagicvsMagic:
                 if self.player.direction == DOWN:
                     self.battle_player.y = self.player.y - 300
 
-                # bullet = Bullet(self.x, bullet_y, SPRITE_SIZE, self.player.direction,self.screen)
-                # self.bullet_group.add(bullet)
-                # self.bullet_cooldown_timer = BULLET_COOLDOWN_DELAY
-
     def create_player(self):
-        random_y = r.randint(0, WIDTH)
-        random_direction = r.choice([LEFT, RIGHT])
-
         x = 0
         y = 0
 
-        if random_direction == LEFT:
-            x = WIDTH
-
-        new_player = Player(x, y, random_direction, SPRITE_SIZE, self.screen)
+        new_player = Player(x, y, RIGHT, SPRITE_SIZE, self.screen)
         self.player_group.add(new_player)
 
     def handle_player_enemy1_collision(self, player, enemy1):
@@ -295,7 +192,6 @@ class MagicvsMagic:
             self.background = pygame.image.load('assets/bg02.png')
             self.battle_player_group.add(self.battle_player)
             self.battle_enemy1_group.add(self.battle_enemy1)
-            #self.player_group.empty() # this code wasn't added earlier
             self.enemy2_group.empty()
             self.mode = BATTLE_1
             return True
@@ -307,7 +203,6 @@ class MagicvsMagic:
             self.background = pygame.image.load('assets/bg03.png')
             self.battle_player_group.add(self.battle_player)
             self.battle_enemy2_group.add(self.battle_enemy2)
-            # self.player_group.empty() # this code wasn't added earlier
             self.enemy1_group.empty()
             self.mode = BATTLE_2
             return True
@@ -319,7 +214,6 @@ class MagicvsMagic:
             self.background = pygame.image.load('assets/bg04.png')
             self.battle_player_group.add(self.battle_player)
             self.battle_enemy3_group.add(self.battle_enemy3)
-            # self.player_group.empty() # this code wasn't added earlier
             self.enemy1_group.empty()
             self.enemy2_group.empty()
             self.mode = BATTLE_3
@@ -329,10 +223,8 @@ class MagicvsMagic:
 
     def handle_bullet_enemy1_collision(self, bullet, enemy1):
         if bullet.rect.colliderect(enemy1.rect):
-            # nothing happens lol, maybe can add a noise or something
             self.battle_enemy1.health -= 1
             if self.battle_enemy1.health == 0:
-
                 self.player.set_position(420, 305)
                 self.player_group.empty()
                 self.battle_player_group.empty()
@@ -344,14 +236,11 @@ class MagicvsMagic:
 
     def handle_bullet_enemy2_collision(self, bullet, enemy2):
         if bullet.rect.colliderect(enemy2.rect):
-            # nothing happens lol, maybe can add a noise or something
             self.battle_enemy2.health -= 1
             if self.battle_enemy2.health == 0:
                 self.player.set_position(720, 305)
-
                 self.battle_player_group.empty()
                 self.battle_enemy2_group.empty()
-
                 self.mode = GAME_STARTED
             return True
         else:
@@ -359,25 +248,18 @@ class MagicvsMagic:
 
     def handle_bullet_enemy3_collision(self, bullet, enemy3):
         if bullet.rect.colliderect(enemy3.rect):
-            # nothing happens lol, maybe can add a noise or something
             self.battle_enemy3.health -= 1
             if self.battle_enemy3.health == 0:
                 self.player.set_position(20, 305)
-
                 self.battle_player_group.empty()
                 self.battle_enemy3_group.empty()
-
                 self.mode = GAME_WON
-
-                #self.mode = GAME_STARTED
-                # change the player.set_position because it's the end of the game
             return True
         else:
             return False
 
     def handle_enemy1bullet1_battle_player_collision(self, player, bullet1):
         if player.rect.colliderect(bullet1.rect):
-            # reference point #1
             self.player.set_position(30, 305)
 
             self.battle_player_group.empty()
@@ -394,7 +276,6 @@ class MagicvsMagic:
 
     def handle_enemy2bullet1_battle_player_collision(self, player, bullet1):
         if player.rect.colliderect(bullet1.rect):
-            # reference point #1
             self.player.set_position(420, 305)
 
             self.battle_player_group.empty()
@@ -411,7 +292,6 @@ class MagicvsMagic:
 
     def handle_enemy3bullet1_battle_player_collision(self, player, bullet1):
         if player.rect.colliderect(bullet1.rect):
-            # reference point #1
             self.player.set_position(720, 305)
 
             self.battle_player_group.empty()
@@ -428,7 +308,6 @@ class MagicvsMagic:
 
     def handle_enemy2bullet2_battle_player_collision(self, player, bullet2):
         if player.rect.colliderect(bullet2.rect):
-            # reference point #2
             self.player.set_position(420, 305)
 
             self.battle_player_group.empty()
@@ -445,7 +324,6 @@ class MagicvsMagic:
 
     def handle_enemy3bullet2_battle_player_collision(self, player, bullet2):
         if player.rect.colliderect(bullet2.rect):
-            # reference point #2
             self.player.set_position(720, 305)
 
             self.battle_player_group.empty()
@@ -463,7 +341,6 @@ class MagicvsMagic:
 
     def handle_enemy2bullet3_battle_player_collision(self, player, bullet3):
         if player.rect.colliderect(bullet3.rect):
-            # reference point 3
             self.player.set_position(420, 305)
 
             self.battle_player_group.empty()
@@ -480,7 +357,6 @@ class MagicvsMagic:
 
     def handle_enemy3bullet3_battle_player_collision(self, player, bullet3):
         if player.rect.colliderect(bullet3.rect):
-            # reference point 3
             self.player.set_position(720, 305)
 
             self.battle_player_group.empty()
@@ -508,9 +384,6 @@ class MagicvsMagic:
 
             self.screen.blit(self.background, (0, 0))
 
-            # if self.mode == GAME_NOT_STARTED:
-                # pass
-            # else:
             if self.mode == GAME_BEGIN:
                 self.handle_game_opening_page()
             elif self.mode == GAME_STARTED:
@@ -525,9 +398,8 @@ class MagicvsMagic:
             elif self.mode == BATTLE_3:
                 self.handle_battle_3_in_session()
                 self.battle_player.speed = 10
-            elif self.mode == GAME_WON:
+            else:
                 self.handle_game_won_page()
-            # add else statement here?
 
             # --- Limit to 60 frames per second
             self.clock.tick(FPS)
@@ -569,33 +441,10 @@ class MagicvsMagic:
         self.battle_enemy2_group.update()
         self.battle_enemy3_group.update()
 
-        self.battle_player.reset_battle_player((WIDTH/2) - (SPRITE_SIZE/2), 330)
-        self.battle_enemy1.reset_battle_enemy_1((WIDTH/2) - (SPRITE_SIZE/2), 0)
-        self.battle_enemy2.reset_battle_enemy_2((WIDTH/2) - (SPRITE_SIZE/2), 0)
-        self.battle_enemy3.reset_battle_enemy_3((WIDTH/2) - (SPRITE_SIZE/2), 0)
-
-    """
-    def handle_between_battles(self):
-        self.player_group.add(self.player)
-        #self.enemy1_group.add(self.enemy1)
-        #self.enemy2_group.add(self.enemy2)
-        #self.enemy3_group.add(self.enemy3)
-
-        pygame.sprite.groupcollide(self.player_group, self.enemy1_group, True, True, self.handle_player_enemy1_collision)
-        pygame.sprite.groupcollide(self.player_group, self.enemy2_group, True, True, self.handle_player_enemy2_collision)
-        pygame.sprite.groupcollide(self.player_group, self.enemy3_group, True, True, self.handle_player_enemy3_collision)
-
-        self.player_group.update()
-        self.enemy1_group.update()
-        self.enemy2_group.update()
-        self.enemy3_group.update()
-
-        self.battle_player_group.update()
-        self.battle_enemy1_group.update()
-        self.battle_enemy2_group.update()
-        self.battle_enemy3_group.update()
-        """
-
+        self.battle_player.reset_battle_player((WIDTH / 2) - (SPRITE_SIZE / 2), 330)
+        self.battle_enemy1.reset_battle_enemy_1((WIDTH / 2) - (SPRITE_SIZE / 2), 0)
+        self.battle_enemy2.reset_battle_enemy_2((WIDTH / 2) - (SPRITE_SIZE / 2), 0)
+        self.battle_enemy3.reset_battle_enemy_3((WIDTH / 2) - (SPRITE_SIZE / 2), 0)
 
     def handle_battle_1_in_session(self):
         self.battle_enemy2_group.empty()
@@ -664,14 +513,12 @@ class MagicvsMagic:
         self.launch_bullet()
         self.bullet_group.update()
 
-        # self.auto_launch_bullet1_v2()
         self.auto_launch_enemy3_bullet1()
         self.enemy3_bullet1_group.update()
 
         self.auto_launch_enemy3_bullet2()
         self.enemy3_bullet2_group.update()
 
-        # self.auto_launch_bullet3_v2()
         self.auto_launch_enemy3_bullet3()
         self.enemy3_bullet3_group.update()
 
@@ -738,12 +585,6 @@ class MagicvsMagic:
         is_mouse_inside_button = play_button_x <= mouse_x <= play_button_x2 \
                                  and play_button_y <= mouse_y <= play_button_y2
         if pygame.mouse.get_pressed()[0] and is_mouse_inside_button:
-            # self.start_time = pygame.time.get_ticks()
-            # self.handle_game_started()
-            # self.player_group.empty()
-            # self.score = 0
-            # self.player = Player(200, 200, 50, self.screen, self)
-            # self.player_group.add(self.player)
             self.mode = GAME_STARTED
 
 
