@@ -12,7 +12,7 @@ class Enemy1(Sprite):
         self.screen = screen
         self.size = size
 
-        self.image = pygame.image.load(f'assets/Avatar_Boli_front.png')
+        self.image = pygame.image.load(f'assets/Avatar_Boli.png')
         self.image = pygame.transform.scale(self.image, (int(size * 2), (int(size * 2))))
 
         self.rect = pygame.Rect(x, y, self.image.get_width(), self.image.get_height())

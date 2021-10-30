@@ -17,14 +17,14 @@ class BattleEnemy2(Sprite):
 
         self.rect = pygame.Rect(x, y, self.image.get_width(), self.image.get_height())
 
-        self.health = 2
+        self.health = 12
 
     def reset_battle_enemy_2(self, x, y):
         self.x = x
         self.y = y
         self.rect.x = self.x
         self.rect.y = self.y
-        self.health = 2
+        self.health = 12
 
     def update(self):
         self.rect.x = self.x

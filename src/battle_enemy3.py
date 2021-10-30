@@ -12,13 +12,13 @@ class BattleEnemy3(Sprite):
         self.screen = screen
         self.direction = RIGHT
         self.size = size
-        self.speed = 6
+        self.speed = 5
         self.enemy_image_timer = IMAGE_DELAY
 
         self.right_images = []
         self.left_images = []
         for idx in range(1,2):
-            self.image = pygame.image.load(f'assets/Avatar_Temmie_right.png')
+            self.image = pygame.image.load(f'assets/Avatar_Temmie.png')
             self.image = pygame.transform.scale(self.image, (int(size * 2), (int(size * 2))))
             self.left_images.append(self.image)
 
@@ -35,7 +35,7 @@ class BattleEnemy3(Sprite):
             self.image = self.get_next_image()
             self.rect = pygame.Rect(x, y, self.image.get_width(), self.image.get_height())
 
-        self.health = 1
+        self.health = 15
 
     def get_next_image(self):
         self.enemy_image_timer -= 1
@@ -55,7 +55,7 @@ class BattleEnemy3(Sprite):
         self.y = y
         self.rect.x = self.x
         self.rect.y = self.y
-        self.health = 1
+        self.health = 15
 
     def update(self):
         self.image = self.get_next_image()

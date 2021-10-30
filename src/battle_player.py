@@ -14,7 +14,7 @@ class BattlePlayer(Sprite):
         self.size = size
         self.player_image_timer = IMAGE_DELAY
 
-        self.speed = 6
+        self.speed = 8
 
         self.right_images = []
         self.left_images = []
