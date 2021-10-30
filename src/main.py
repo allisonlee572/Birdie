@@ -100,6 +100,11 @@ class MagicvsMagic:
 
         self.play_button = pygame.image.load('assets/play_button.png')
 
+        self.battle_enemy1_bullet_x = None
+        self.battle_enemy2_bullet_x = None
+        self.battle_enemy3_bullet_x = None
+        self.battle_player_bullet_x = None
+
     def auto_launch_enemy1_bullet1(self):
         self.enemy1_bullet1_cooldown_timer -= 1
         if self.enemy1_bullet1_cooldown_timer == 0:
