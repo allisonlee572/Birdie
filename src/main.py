@@ -26,11 +26,12 @@ class MagicvsMagic:
     def __init__(self):
         pygame.init()
 
-        self.mode = GAME_STARTED
+        #self.mode = GAME_STARTED
+        self.mode = GAME_BEGIN
         # self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         # self.direction_x = BattleEnemy3.right_direction_x
-        self.project_name = 'Puddles'
+        self.project_name = 'Magic vs. Magic'
 
         pygame.display.set_caption(self.project_name)
 
@@ -97,7 +98,10 @@ class MagicvsMagic:
         self.enemy3_bullet3_group = Group()
         self.enemy3_bullet3_cooldown_timer = ENEMY_BULLET_COOLDOWN_DELAY
 
-        self.font = pygame.font.SysFont("default", 30)
+        self.font = pygame.font.SysFont("Times New Roman Bold", 23)
+        self.big_font = pygame.font.SysFont("Times New Roman Bold", 93)
+
+        #Times New Roman Bold, Times New Roman ,Charter, Cochin, default,
 
         self.plop_sound = pygame.mixer.Sound("assets/plop.wav")
         # self.plop_sound.set_volume(0.2)
@@ -105,6 +109,8 @@ class MagicvsMagic:
         pygame.mixer.music.load("assets/background.mp3")
         # pygame.mixer.music.set_volume(0.1)
         pygame.mixer.music.play()
+
+        self.play_button = pygame.image.load('assets/play_button.png')
 
     '''
     def create_bullet(self):
@@ -289,7 +295,7 @@ class MagicvsMagic:
             self.background = pygame.image.load('assets/bg02.png')
             self.battle_player_group.add(self.battle_player)
             self.battle_enemy1_group.add(self.battle_enemy1)
-            # self.player_group.empty() # this code wasn't added earlier
+            #self.player_group.empty() # this code wasn't added earlier
             self.enemy2_group.empty()
             self.mode = BATTLE_1
             return True
@@ -317,7 +323,6 @@ class MagicvsMagic:
             self.enemy1_group.empty()
             self.enemy2_group.empty()
             self.mode = BATTLE_3
-            print("collision correct")
             return True
         else:
             return False
@@ -329,9 +334,9 @@ class MagicvsMagic:
             if self.battle_enemy1.health == 0:
 
                 self.player.set_position(420, 305)
+                self.player_group.empty()
                 self.battle_player_group.empty()
                 self.battle_enemy1_group.empty()
-
                 self.mode = GAME_STARTED
             return True
         else:
@@ -362,7 +367,9 @@ class MagicvsMagic:
                 self.battle_player_group.empty()
                 self.battle_enemy3_group.empty()
 
-                self.mode = GAME_STARTED
+                self.mode = GAME_WON
+
+                #self.mode = GAME_STARTED
                 # change the player.set_position because it's the end of the game
             return True
         else:
@@ -504,18 +511,23 @@ class MagicvsMagic:
             # if self.mode == GAME_NOT_STARTED:
                 # pass
             # else:
-            if self.mode == GAME_STARTED:
+            if self.mode == GAME_BEGIN:
+                self.handle_game_opening_page()
+            elif self.mode == GAME_STARTED:
                 self.handle_game_started()
                 self.battle_player.speed = 8
-            if self.mode == BATTLE_1:
+            elif self.mode == BATTLE_1:
                 self.handle_battle_1_in_session()
                 self.battle_player.speed = 8
-            if self.mode == BATTLE_2:
+            elif self.mode == BATTLE_2:
                 self.handle_battle_2_in_session()
                 self.battle_player.speed = 8
-            if self.mode == BATTLE_3:
+            elif self.mode == BATTLE_3:
                 self.handle_battle_3_in_session()
                 self.battle_player.speed = 10
+            elif self.mode == GAME_WON:
+                self.handle_game_won_page()
+            # add else statement here?
 
             # --- Limit to 60 frames per second
             self.clock.tick(FPS)
@@ -672,6 +684,36 @@ class MagicvsMagic:
         pygame.sprite.groupcollide(self.enemy3_bullet3_group, self.battle_player_group, True, False,
                                    self.handle_enemy3bullet3_battle_player_collision)
 
+    def handle_game_opening_page(self):
+        self.background = pygame.image.load('assets/bg01.png')
+        middle_x = WIDTH / 2
+        middle_y = HEIGHT / 2
+
+        title_msg = self.big_font.render('Magic vs. Magic', 1, WHITE)
+        title_x = middle_x - title_msg.get_width() / 2
+        title_y = middle_y - 220
+
+        self.screen.blit(title_msg, (title_x, title_y))
+
+        play_button_x = middle_x - self.play_button.get_width() / 2
+        play_button_y = (middle_y - self.play_button.get_height() / 2)
+        self.handle_play_button(play_button_x, play_button_y)
+
+    def handle_game_won_page(self):
+
+        middle_x = WIDTH / 2
+        middle_y = HEIGHT / 2
+
+        game_won_msg = self.big_font.render('GAME WON', 1, WHITE)
+        game_won_x = middle_x - game_won_msg.get_width() / 2
+        game_won_y = middle_y - 210
+
+        self.screen.blit(game_won_msg, (game_won_x, game_won_y))
+
+        play_button_x = middle_x - self.play_button.get_width() / 2
+        play_button_y = (middle_y - self.play_button.get_height() / 2)
+        self.handle_play_button(play_button_x, play_button_y)
+
     def draw_enemy1_health_indicator(self):
         health_text = f"Enemy Lives Remaining: {self.battle_enemy1.health}"
         health_msg = self.font.render(health_text, 1, BLACK)
@@ -687,30 +729,30 @@ class MagicvsMagic:
         health_msg = self.font.render(health_text, 1, BLACK)
         self.screen.blit(health_msg, (45, 50))
 
+    def handle_play_button(self, play_button_x, play_button_y):
+        self.screen.blit(self.play_button, (play_button_x, play_button_y))
+
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+        play_button_x2 = play_button_x + self.play_button.get_width()
+        play_button_y2 = play_button_y + self.play_button.get_height()
+        is_mouse_inside_button = play_button_x <= mouse_x <= play_button_x2 \
+                                 and play_button_y <= mouse_y <= play_button_y2
+        if pygame.mouse.get_pressed()[0] and is_mouse_inside_button:
+            # self.start_time = pygame.time.get_ticks()
+            # self.handle_game_started()
+            # self.player_group.empty()
+            # self.score = 0
+            # self.player = Player(200, 200, 50, self.screen, self)
+            # self.player_group.add(self.player)
+            self.mode = GAME_STARTED
+
 
 if __name__ == '__main__':
     magicvsmagic = MagicvsMagic()
     magicvsmagic.game_loop()
 
-    #puddles = Puddles()
-    #puddles.game_loop()
-
-# rename project?
-# if want to add three hearts for the enemies lives = create one sprite for heart
-# use a for loop (for i in range(1,3)?
-# and want to space out the hearts by multipying a constant or something?
-
-
 # After most codes are finished:
-# change enemy health back to higher numbers
-# make the player be able to move only right after most of the codes are done
-# change the player's position after the third battle is won because the game is closed to finished
+# change enemy health back to higher numbers -- especially battle_enemy3
 # see if I still want to make the battle player faster at BATTLE_3?
-
 # for the collision detections, it says bullet1 instead of enemy1_bullet1, enemy2_bullet1, etc.
-# when on the landing page, make sure the player only faces right - which might already happen if the player can only
-# move right
-# add game won page
-# add title at the top of the landing page?
-# recrop images?
-#go through all of the codes and delete any commented out codes, any codes with hashtags, any extra/unused assets and files
+# go through all of the codes and delete any commented out codes, any codes with hashtags, any extra/unused assets and files

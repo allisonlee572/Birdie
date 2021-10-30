@@ -43,7 +43,7 @@ class BattleEnemy3(Sprite):
             self.image = self.get_next_image()
             self.rect = pygame.Rect(x, y, self.image.get_width(), self.image.get_height())
 
-        self.health = 7
+        self.health = 1
 
 
         # self.images = []
@@ -71,7 +71,7 @@ class BattleEnemy3(Sprite):
         self.y = y
         self.rect.x = self.x
         self.rect.y = self.y
-        self.health = 7
+        self.health = 1
 
     def update(self):
         # self.screen.blit(self.image, (self.x, self.y))

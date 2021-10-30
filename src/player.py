@@ -73,13 +73,13 @@ class Player(Sprite):
 
         keys_pressed = pygame.key.get_pressed()
 
-        if keys_pressed[pygame.K_w]:
-            self.y -= self.speed
-        if keys_pressed[pygame.K_a]:
-            self.x -= self.speed
-            self.direction = LEFT
-        if keys_pressed[pygame.K_s]:
-            self.y += self.speed
+        #if keys_pressed[pygame.K_w]:
+            #self.y -= self.speed
+        #if keys_pressed[pygame.K_a]:
+            #self.x -= self.speed
+            #self.direction = LEFT
+        #if keys_pressed[pygame.K_s]:
+            #self.y += self.speed
         if keys_pressed[pygame.K_d]:
             self.x += self.speed
             self.direction = RIGHT
