@@ -47,10 +47,10 @@ class MagicvsMagic:
         self.player = Player(30, 305, RIGHT, SPRITE_SIZE, self.screen)
 
         self.enemy1_group = Group()
-        self.enemy1 = Enemy1(270, 330, RIGHT, SPRITE_SIZE, self.screen)
+        self.enemy1 = Enemy1(270, 330, SPRITE_SIZE, self.screen)
 
         self.enemy2_group = Group()
-        self.enemy2 = Enemy2(570, 330, RIGHT, SPRITE_SIZE, self.screen)
+        self.enemy2 = Enemy2(570, 330, SPRITE_SIZE, self.screen)
 
         self.enemy3_group = Group()
         self.enemy3 = Enemy3(870, 330, RIGHT, SPRITE_SIZE, self.screen)
@@ -107,7 +107,7 @@ class MagicvsMagic:
             self.enemy1_bullet1_cooldown_timer = ENEMY_BULLET_COOLDOWN_DELAY
             self.battle_enemy1_bullet_x = self.battle_enemy1.x + (SPRITE_SIZE / 2)
             new_enemy1_bullet1 = Enemy1_Bullet1(self.battle_enemy1_bullet_x, self.battle_enemy1.y,
-                                         SPRITE_SIZE, self.enemy1.direction, self.screen)
+                                         SPRITE_SIZE, self.screen)
             self.enemy1_bullet1_group.add(new_enemy1_bullet1)
 
     def auto_launch_enemy2_bullet1(self):
@@ -116,7 +116,7 @@ class MagicvsMagic:
             self.enemy2_bullet1_cooldown_timer = ENEMY_BULLET_COOLDOWN_DELAY
             self.battle_enemy2_bullet_x = self.battle_enemy2.x + (SPRITE_SIZE / 2)
             new_enemy2_bullet1 = Enemy2_Bullet1(self.battle_enemy2_bullet_x, self.battle_enemy2.y,
-                                                SPRITE_SIZE, self.enemy2.direction, self.screen)
+                                                SPRITE_SIZE, self.screen)
             self.enemy2_bullet1_group.add(new_enemy2_bullet1)
 
     def auto_launch_enemy3_bullet1(self):
@@ -134,7 +134,7 @@ class MagicvsMagic:
             self.enemy2_bullet2_cooldown_timer = ENEMY_BULLET_COOLDOWN_DELAY
             self.battle_enemy2_bullet_x = self.battle_enemy2.x + (SPRITE_SIZE / 2)
             new_enemy2_bullet2 = Enemy2_Bullet2(self.battle_enemy2_bullet_x, self.battle_enemy2.y,
-                                                SPRITE_SIZE, self.enemy2.direction, self.screen)
+                                                SPRITE_SIZE, self.screen)
             self.enemy2_bullet2_group.add(new_enemy2_bullet2)
 
     def auto_launch_enemy3_bullet2(self):
@@ -152,7 +152,7 @@ class MagicvsMagic:
             self.enemy2_bullet3_cooldown_timer = ENEMY_BULLET_COOLDOWN_DELAY
             self.battle_enemy2_bullet_x = self.battle_enemy2.x + (SPRITE_SIZE / 2)
             new_enemy2_bullet3 = Enemy2_Bullet3(self.battle_enemy2_bullet_x, self.battle_enemy2.y,
-                                                SPRITE_SIZE, self.enemy2.direction, self.screen)
+                                                SPRITE_SIZE, self.screen)
             self.enemy2_bullet3_group.add(new_enemy2_bullet3)
 
     def auto_launch_enemy3_bullet3(self):
@@ -172,20 +172,13 @@ class MagicvsMagic:
 
         if self.bullet_cooldown_timer <= 0:
             if keys_pressed[pygame.K_SPACE]:
-                bullet = Bullet(self.battle_player_bullet_x, self.battle_player.y, SPRITE_SIZE, self.player.direction, self.screen)
+                bullet = Bullet(self.battle_player_bullet_x, self.battle_player.y, SPRITE_SIZE, self.screen)
                 self.bullet_group.add(bullet)
                 self.bullet_cooldown_timer = BULLET_COOLDOWN_DELAY
                 if self.player.direction == UP:
                     self.battle_player.y = self.player.y + 50
                 if self.player.direction == DOWN:
                     self.battle_player.y = self.player.y - 300
-
-    def create_player(self):
-        x = 0
-        y = 0
-
-        new_player = Player(x, y, RIGHT, SPRITE_SIZE, self.screen)
-        self.player_group.add(new_player)
 
     def handle_player_enemy1_collision(self, player, enemy1):
         if player.rect.colliderect(enemy1.rect):
@@ -594,6 +587,6 @@ if __name__ == '__main__':
 
 # After most codes are finished:
 # change enemy health back to higher numbers -- especially battle_enemy3
-# see if I still want to make the battle player faster at BATTLE_3?
+# see if I still want to make the battle player faster at BATTLE_3? or make battle_enemy3 slower
 # for the collision detections, it says bullet1 instead of enemy1_bullet1, enemy2_bullet1, etc.
 # go through all of the codes and delete any commented out codes, any codes with hashtags, any extra/unused assets and files

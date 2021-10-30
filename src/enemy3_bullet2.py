@@ -10,13 +10,10 @@ class Enemy3_Bullet2(Sprite):
         self.x = x
         self.y = y
         self.screen = screen
-
         self.direction = direction
 
         self.image = pygame.image.load(f'assets/Enemy_Bullet.png')
         self.image = pygame.transform.scale(self.image, (int(size*1.0), size))
-        if direction == DOWN:
-            self.image = pygame.transform.flip(self.image, False, True)
 
         self.speed = 8
 

@@ -1,6 +1,5 @@
 from pygame.sprite import Sprite
 import pygame
-import random as r
 from config import *
 
 
@@ -13,8 +12,7 @@ class BattlePlayer(Sprite):
         self.screen = screen
         self.direction = direction
         self.size = size
-
-        self.player_float_timer = PLAYER_FLOAT_DELAY
+        self.player_image_timer = IMAGE_DELAY
 
         self.speed = 6
 
@@ -25,14 +23,10 @@ class BattlePlayer(Sprite):
             self.image = pygame.transform.scale(self.image, (int(size * 2.0), (int(size * 2.5))))
             self.right_images.append(self.image)
 
-            # self.screen.blit(self.image, (self.x, self.y))
-
             left_image = pygame.transform.flip(self.image, True, False)
             self.left_images.append(left_image)
 
             self.image_index = 0
-
-            # self.player_flap_timer = PLAYER_FLAP_DELAY
 
             if self.direction == RIGHT:
                 self.images = self.right_images
@@ -42,17 +36,10 @@ class BattlePlayer(Sprite):
             self.image = self.get_next_image()
             self.rect = pygame.Rect(x, y, self.image.get_width(), self.image.get_height())
 
-
-        # self.images = []
-
-        # self.images.append(img)
-        # self.image_index = 0
-        # image = self.images[0]
-
     def get_next_image(self):
-        self.player_float_timer -= 1
-        if self.player_float_timer == 0:
-            self.player_float_timer = PLAYER_FLOAT_DELAY
+        self.player_image_timer -= 1
+        if self.player_image_timer == 0:
+            self.player_image_timer = IMAGE_DELAY
             self.image_index += 1
         if self.image_index == len(self.images):
             self.image_index = 0
@@ -69,8 +56,6 @@ class BattlePlayer(Sprite):
         self.rect.y = self.y
 
     def update(self):
-        # self.screen.blit(self.image, (self.x, self.y))
-
         keys_pressed = pygame.key.get_pressed()
 
         if keys_pressed[pygame.K_a]:
@@ -79,12 +64,11 @@ class BattlePlayer(Sprite):
         if keys_pressed[pygame.K_d]:
             self.x += self.speed
             self.direction = RIGHT
+
         self.image = self.get_next_image()
         
         self.rect.x = self.x
         self.rect.y = self.y
-
-        # image = self.get_next_image()
 
         if DEBUG_MODE:
             pygame.draw.rect(self.screen, BLUE, self.rect)

@@ -14,7 +14,7 @@ class Enemy3(Sprite):
         self.direction = direction
         self.size = size
         self.speed = 6
-        self.player_float_timer = PLAYER_FLOAT_DELAY
+        self.player_float_timer = IMAGE_DELAY
 
         self.right_images = []
         self.left_images = []
@@ -49,7 +49,7 @@ class Enemy3(Sprite):
     def get_next_image(self):
         self.player_float_timer -= 1
         if self.player_float_timer == 0:
-            self.player_float_timer = PLAYER_FLOAT_DELAY
+            self.player_float_timer = IMAGE_DELAY
             self.image_index += 1
         if self.image_index == len(self.images):
             self.image_index = 0
