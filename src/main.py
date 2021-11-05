@@ -170,10 +170,8 @@ class MagicvsMagic:
 
     def launch_bullet(self):
         keys_pressed = pygame.key.get_pressed()
-
         self.bullet_cooldown_timer -= 1
         self.battle_player_bullet_x = self.battle_player.x + (SPRITE_SIZE / 2)
-
         if self.bullet_cooldown_timer <= 0:
             if keys_pressed[pygame.K_SPACE]:
                 bullet = Bullet(self.battle_player_bullet_x, self.battle_player.y, SPRITE_SIZE, self.screen)
@@ -251,8 +249,8 @@ class MagicvsMagic:
         else:
             return False
 
-    def handle_enemy1bullet1_battle_player_collision(self, player, bullet1):
-        if player.rect.colliderect(bullet1.rect):
+    def handle_enemy1bullet1_battle_player_collision(self, battle_player, enemy1_bullet1):
+        if battle_player.rect.colliderect(enemy1_bullet1.rect):
             self.player.set_position(30, 305)
 
             self.battle_player_group.empty()
@@ -267,8 +265,8 @@ class MagicvsMagic:
         else:
             return False
 
-    def handle_enemy2bullet1_battle_player_collision(self, player, bullet1):
-        if player.rect.colliderect(bullet1.rect):
+    def handle_enemy2bullet1_battle_player_collision(self, battle_player, enemy2_bullet1):
+        if battle_player.rect.colliderect(enemy2_bullet1.rect):
             self.player.set_position(420, 305)
 
             self.battle_player_group.empty()
@@ -283,8 +281,8 @@ class MagicvsMagic:
         else:
             return False
 
-    def handle_enemy3bullet1_battle_player_collision(self, player, bullet1):
-        if player.rect.colliderect(bullet1.rect):
+    def handle_enemy3bullet1_battle_player_collision(self, battle_player, enemy3_bullet1):
+        if battle_player.rect.colliderect(enemy3_bullet1.rect):
             self.player.set_position(720, 305)
 
             self.battle_player_group.empty()
@@ -299,8 +297,8 @@ class MagicvsMagic:
         else:
             return False
 
-    def handle_enemy2bullet2_battle_player_collision(self, player, bullet2):
-        if player.rect.colliderect(bullet2.rect):
+    def handle_enemy2bullet2_battle_player_collision(self, battle_player, enemy2_bullet2):
+        if battle_player.rect.colliderect(enemy2_bullet2.rect):
             self.player.set_position(420, 305)
 
             self.battle_player_group.empty()
@@ -315,8 +313,8 @@ class MagicvsMagic:
         else:
             return False
 
-    def handle_enemy3bullet2_battle_player_collision(self, player, bullet2):
-        if player.rect.colliderect(bullet2.rect):
+    def handle_enemy3bullet2_battle_player_collision(self, battle_player, enemy3_bullet2):
+        if battle_player.rect.colliderect(enemy3_bullet2.rect):
             self.player.set_position(720, 305)
 
             self.battle_player_group.empty()
@@ -331,8 +329,8 @@ class MagicvsMagic:
         else:
             return False
 
-    def handle_enemy2bullet3_battle_player_collision(self, player, bullet3):
-        if player.rect.colliderect(bullet3.rect):
+    def handle_enemy2bullet3_battle_player_collision(self, battle_player, enemy2_bullet3):
+        if battle_player.rect.colliderect(enemy2_bullet3.rect):
             self.player.set_position(420, 305)
 
             self.battle_player_group.empty()
@@ -347,8 +345,8 @@ class MagicvsMagic:
         else:
             return False
 
-    def handle_enemy3bullet3_battle_player_collision(self, player, bullet3):
-        if player.rect.colliderect(bullet3.rect):
+    def handle_enemy3bullet3_battle_player_collision(self, battle_player, enemy3_bullet3):
+        if battle_player.rect.colliderect(enemy3_bullet3.rect):
             self.player.set_position(720, 305)
 
             self.battle_player_group.empty()
