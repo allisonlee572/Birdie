@@ -18,7 +18,7 @@ class BattleEnemy3(Sprite):
         self.right_images = []
         self.left_images = []
         for idx in range(1,2):
-            self.image = pygame.image.load(f'assets/Avatar_Temmie.png')
+            self.image = pygame.image.load(f'assets/Avatar_Cat.png')
             self.image = pygame.transform.scale(self.image, (int(size * 2), (int(size * 2))))
             self.left_images.append(self.image)
 

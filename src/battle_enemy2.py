@@ -12,7 +12,7 @@ class BattleEnemy2(Sprite):
         self.screen = screen
         self.direction = direction
         self.size = size
-        self.image = pygame.image.load(f'assets/Avatar_DrunkBunny_front.png')
+        self.image = pygame.image.load(f'assets/Avatar_Bunny_front.png')
         self.image = pygame.transform.scale(self.image, (int(size * 2), (int(size * 2))))
 
         self.rect = pygame.Rect(x, y, self.image.get_width(), self.image.get_height())
